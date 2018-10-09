@@ -1,0 +1,312 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Export Invoice</title>
+<style>
+#p1 {
+	background-color:#ffe6b3;
+	padding:15px;
+}
+#divT1 {
+	background-color:#ffffcc; 
+	padding:15px; 
+	text-align:left; 
+	font-size:26px
+}	
+#divT20,#divT21,#divT22 {
+	background-color:skyblue;text-align:center;padding:15px;
+}
+#divT3 {
+	background-color:#ff944d;padding:15px;
+}
+#divT41,#divT42,#divT43,#divT44,#divT45,#divT46,#divT47,#divT48 {
+	background-color:#ffe6b3; padding:15px;text-align:left;
+}
+</style>
+<script>
+	function addBorder(){
+		 document.getElementById("divT1").style.border = "thin solid #000000";
+		 document.getElementById("divT20").style.border = "thin solid #000000";
+		 document.getElementById("p1").style.border = "thin solid #000000";
+		 document.getElementById("divT21").style.border = "thin solid #000000";
+		 document.getElementById("divT22").style.border = "thin solid #000000";
+		 document.getElementById("divT41").style.border = "thin solid #000000";
+		 document.getElementById("divT42").style.border = "thin solid #000000";
+		 document.getElementById("divT43").style.border = "thin solid #000000";
+		 document.getElementById("divT44").style.border = "thin solid #000000";
+		 document.getElementById("divT45").style.border = "thin solid #000000";
+		 document.getElementById("divT46").style.border = "thin solid #000000";
+		 document.getElementById("divT47").style.border = "thin solid #000000";
+		 document.getElementById("divT48").style.border = "thin solid #000000";
+	}
+</script>
+</head>
+<body onload="addBorder()">
+<div style="position:relative;">
+<div style="float:left; width:100%" id="divT1">
+	<div style="float:left; width:20%">{{img}}</div>
+	<div style="float:left; width:80%; text-align:center">Export Invoice</div>
+
+
+</div>
+<div style="float:left; width:100%" id="divT20">{{name_of_comp}}</div>
+<div style="float:left; width:100%" id="divT21">{{cin}}</div>
+<div style="float:left; width:100%" id="divT22">{{addr}}</div>
+
+
+<div style="float:left; width:100%" id="divT41">
+	<div style="float:left; width:60%" >State:{{State}}</div>
+	<div style="float:right; width:40%">Transportation Mode:{{TsptMd}}</div>
+
+
+</div>
+<div style="float:left; width:100%" id="divT42" >
+	<div style="float:left; width:60%" >Tax Is Payable On Reverse Charge: (Yes/No) {{yn}}</div>
+	<div style="float:left; width:40%" >Vehicle No :{{Vikno}}</div>
+
+
+</div>
+<div style="float:left; width:100%" id="divT43" >
+	<div style="float:left; width:60%" >Invoice Serial Number:{{Sno}</div>
+	<div style="float:left; width:40%" >Date & Time of Supply: {{DTM}}</div>
+
+
+</div>
+<div style="float:left; width:100%" id="divT44" >
+	<div style="float:left; width:60%" >Invoice Date:{{DT}}</div>
+	<div style="float:left; width:40%" >Place of Supply:{{FSup}}</div>
+
+</div>
+
+<div style="float:left; width:100%" id="divT45" >
+	<div style="float:left; width:60%" >Details of Receiver (Billed to)</div>
+	<div style="float:left; width:40%" >Details of Consignee (Shipped to)</div>
+</div>
+
+<div style="float:left; width:100%;" id="divT46" >
+	<div style="float:left; width:60%" >Name:{{nmB}}</div>
+	<div style="float:left; width:40%" >Name:{{nmS}}</div>
+
+</div>
+
+<div style="float:left; width:100%" id="divT47" >
+	<div style="float:left; width:60%" >Address:{{addrB}}</div>
+	<div style="float:left; width:40%" >Address: {{}addrS}</div>
+
+</div>
+<div style="float:left; width:100%" id="divT48" >
+	<div style="float:left; width:60%" >Country:{{countryB}}</div>
+	<div style="float:left; width:40%" >Country: {{countryS}}</div>
+
+</div>
+
+
+</div>
+
+
+
+					<!--	<th width="5%">S.no</th>
+						<th width="15%">Material Code</th>
+						<th width="20%">Description of Goods</th>
+						<th width="10%">HSN Code(GST)</th>
+						<th width="10%">Qty</th>
+						<th	width="10%">Unit</th>
+						<th width="15%">Rate</th>
+						<th width="15%">Total</th>
+					</tr>
+						<th width="20%">Discount</th>
+						<th width="20%">Taxable Value</th>
+						<th width="7.5%">CGST Rate</th>
+						<th width="7.5%">CGST Amount</th>
+						<th width="7.5%">SGST Rate</th>
+						<th width="7.5%">SGST Amount</th>
+						<th width="7.5%">IGST Rate</th>
+						<th width="7.5%">IGST Amount</th>
+						<total amount>-->
+					
+</div>
+<div style="float:left; width:100%">
+<!--<div style="float:left; width:50%" >-->
+					<table width="100%" border="1" style="font-size:12">
+						<tr>
+							<td>S.no</td>
+						<td >Material Code</td>
+						<td >Description of Goods</td>
+						<td id="row1">HSN Code(GST)</td>
+						<td >Qty</td>
+						<td	>Unit</td>
+						<td >Rate</td>
+						<td >Total</td>
+						<td >Discount</td>
+						<td >Taxable Value</td>
+						<td >IGST Rate</td>
+						<td >IGST Amount</td>
+						<td>Total Amount</td>
+						</tr>
+						<!--Add new rows dynamically here-->
+						{%for key, value in tax_form.iteritems()%}
+							
+							<tr>
+							{%for key, value in items.iteritems()%}
+								<td>{{value}}</td>
+								{%endfor%}
+							</tr>
+						{%endfor%}
+						<tr>
+							<td></td>
+							<td></td>
+							<td>Freight Charges</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>{{tot_frit_chrg}}</td>
+							<td></td>
+							<td></td>
+							<td></td>
+						
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td>Loading Charges</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>{{loading_chrg}}</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td>Insurance Charges</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>{{insurance_chrg}}</td>
+							<td></td>
+							<td></td>
+							<td></td>
+						
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td>Other Charges</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>{{other_chrg}}</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td>Total</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>{{total}}</td>
+							<td></td>
+							<td></td>
+							<td></td>
+					
+						</tr>
+							<tr>
+							<td></td>
+							<td></td>
+							<td>Total Invoice Value</td>
+							<td>(in figures)</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>{{tot_igst_rate}}</td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td>Total Invoice Value</td>
+							<td>(in words)</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>{{total_eng}}</td>
+							<td></td>
+							<td></td>
+							<td></td>
+						
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td>Amount of Tax Subject to Reverse Charge</td>
+							<td>(in figures)</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>{{tot_igst_rev}}</td>
+						</tr>
+						</table>
+
+<!--/div-->
+<!--div style="float:left; width:50%;" >
+					<table width="50%" id="tbl">
+						<tr>
+							<th width="20%">Discount</th>
+						<th width="20%">Taxable Value</th>
+						<th width="7.5%">CGST Rate</th>
+						<th width="7.5%">CGST Amount</th>
+						<th width="7.5%">SGST Rate</th>
+						<th width="7.5%">SGST Amount</th>
+						<th width="7.5%">IGST Rate</th>
+						<th width="7.5%">IGST Amount</th>
+						</tr>
+						<!--Add New Rows Dynamically Here>
+						</table>
+<!--/div-->
+<div>
+<table width="100%" border="1">
+						<tr>
+						<th>Bank Details</th>
+						<td>Bank Account Number:</td>
+						<td>{{bank_det}}</td>
+						<td>IFSC Code:</td>
+						<td>{{ifsc_cd}}</td>
+						
+						</tr>
+					</table>
+		<table width="100%" border="1">
+			<tr>
+				<td>YOUR TERM AND CONDITIONS OF SALE</td>
+				<td>{{company_name}}</td>
+			</tr>
+			<tr>
+				<td>{{term_cnd1}}</td>
+				<td>Signature:{{sign}}</td>
+			</tr>
+			<tr>
+				<td>{{term_cnd2}}</td>
+				<td><strong>Authorised Signatory {{a_sign}}</strong></td>
+			</tr>
+		</table>
+	</div>						
+</div>
+
+</body>
+</html>

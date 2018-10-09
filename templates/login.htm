@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css" rel="Stylesheet"></link>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
+    <script src="//code.jquery.com/ui/1.12.0/jquery-ui.js" ></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="/static/login.js" ></script>
+    <style>
+        .hid{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<form method="GET" id="form">
+    <div class="container col-lg-7 col-lg-offset-3">
+        <legend>Login form</legend>
+
+            <div class="row">   
+                <div class="alert alert-danger col-xs-12 hid" id="err"></div>
+            </div>
+            
+            <div class="row form-group">
+                <div class="col-sm-6">
+                    <label>Email</label>
+                    <input type="email" name="contact" id="contact" class="form-control" required><br>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-sm-6">
+                    <label>Password</label>
+                    <input type="password" name="password" id="password" class="form-control" required><br>
+                </div>
+            </div>
+
+        <div class="row">
+            <button type="submit" class="btn btn-primary col-xs-offset-3 col-xs-6" id="submit" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Please wait...">Submit</button><br>
+        </div>
+        <div></div>
+    
+    </div>
+</form>
+
+</body>
+</html>

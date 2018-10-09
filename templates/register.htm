@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css" rel="Stylesheet"></link>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
+    <script src="//code.jquery.com/ui/1.12.0/jquery-ui.js" ></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="/static/register.js" ></script>
+    <style>
+        .hid{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<form method="GET" id="form">
+    <div class="container col-sm-8 col-sm-offset-2 col-lg-5 col-lg-offset-4">
+        <legend>Registration form</legend>
+
+            <div class="row">   
+                <div class="alert alert-danger col-xs-12 hid" id="err"></div>
+            </div>
+            
+            <div class="row form-group">
+                <div class="col-sm-6">
+                    <label>Name</label>
+                    <input type="text" name="name" class="form-control" id="name" required><br>
+                </div>
+                <div class="col-sm-6">
+                    <label>Email</label>
+                    <input type="email" name="email" id="email" class="form-control" required><br>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                
+                <div class="col-sm-6">
+                    <label>Password</label>
+                    <input type="password" name="password" id="password" class="form-control" required><br>
+                </div>
+
+                <div class="col-sm-6">
+                    <label>Confirm Password</label>
+                    <input type="password"  id="confirm_password" class="form-control" required><br>
+                </div>
+
+            </div>
+        
+            <div class="row form-group">
+                <div class="col-sm-12">
+                    <label>Address</label>
+                    <input type="textarea" name="address" id="address" class="form-control" required><br>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-sm-3">
+                    <label>State</label>
+                    <select name="state" id="state" class="form-control" required>
+                        <option>Select</option>
+                        <option value="1">Jammu and Kashmir</option>
+                        <option value="2">Himachal Pradesh</option>
+                        <option value="3">Punjab</option>
+                        <option value="4">Chandigarh</option>
+                        <option value="5">Uttarakhand</option>
+                        <option value="6">Haryana</option>
+                        <option value="7">Delhi</option>
+                        <option value="8">Rajasthan</option>
+                        <option value="9">Uttar Pradesh</option>
+                        <option value="10">Bihar</option>
+                        <option value="11">Sikkim</option>
+                        <option value="12">Arunachal Pradesh</option>
+                        <option value="13">Nagaland</option>
+                        <option value="14">Manipur</option>
+                        <option value="15">Mizoram</option>
+                        <option value="16">Tripura</option>
+                        <option value="17">Meghalaya</option>
+                        <option value="18">Assam</option>
+                        <option value="19">West Bengal</option>
+                        <option value="20">Jharkhand</option>
+                        <option value="21">Odisha(Orissa)</option>
+                        <option value="22">Chhattisgarh</option>
+                        <option value="23">Madhya Pradesh</option>
+                        <option value="24">Gujarat</option>
+                        <option value="25">Daman and Diu</option>
+                        <option value="26">Dardra and Nagara haveli</option>
+                        <option value="27">Maharashtra</option>
+                        <option value="28">Andhra Pradesh</option>
+                        <option value="29">Karnataka</option>
+                        <option value="30">Goa</option>
+                        <option value="31">Lakshadweep</option>
+                        <option value="32">Kerala</option>
+                        <option value="33">Tamil Nadu</option>
+                        <option value="34">Puducherry</option>
+                        <option value="35">Andaman and Nicobar island</option>
+                        
+                        
+
+                    </select>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-sm-6">
+                    <label>4 digits for sale invoice</label>
+                    <input type="text" name="prepend_sale" class="form-control" id="prepend_sale" size="4" ><br>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-sm-3">
+                    <label>Type of entity</label>
+                    <select name="type" id="type" class="form-control" required>
+                        <option>Individual</option>
+                        <option>Sole Proprietor</option>
+                        <option>Partnership</option>
+                        <option>HUF</option>
+                        <option>Company</option>
+                        <option>AOP</option>
+                        <option>BOI</option>
+                        <option>Society</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <label class="col-sm-10"> Do you deal in goods or services?</label>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <select name="goods" id="goods" class="form-control" required>
+                            <option value="1">Goods</option>
+                            <option value="0">Services</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <label class="col-sm-10"> GSTN</label>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <input type="text" name="gstn" id="gstn" class="form-control" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <label class="col-sm-10"> Do you require PO based accounting?</label>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <select name="po" id="po" class="form-control" required>
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <label class="col-sm-10"> Select package level</label>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <select name="level" id="level" class="form-control" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <label class="col-sm-10">Select series type</label>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <select name="series_type" id="series_type" class="form-control" required>
+                            <option value="1">regular</option>
+                            <option value="2">INVOICE100000</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-sm-6">
+                    <label>Bank A/c</label>
+                    <input type="text" name="bankac" class="form-control" id="bankac"><br>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-sm-6">
+                    <label>IFSC</label>
+                    <input type="text" name="ifsc" class="form-control" id="ifsc"><br>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-sm-6">
+                    <label>PAN</label>
+                    <input type="text" name="pan" class="form-control" id="pan"><br>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-sm-12">
+                    <label>Terms and condition</label>
+                    <input type="textarea" name="tnc" class="form-control" id="tnc"><br>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-6">
+                    <label>Do you want independent series for inter and intra sales?</label>
+                    <select name="diff_series" id="diff_series" class="form-control cust">
+                        <option value="0">No</option>
+                        <option  value="1">Yes</option>
+                    </select>
+                </div>
+            </div>
+
+        <div class="row">
+            <button type="submit" class="btn btn-primary col-xs-offset-3 col-xs-6" id="submit" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Please wait...">Submit</button><br>
+        </div>
+        <div></div>
+    
+    </div>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css" rel="Stylesheet"></link>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
+    <script src="//code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--<script src="/static/create_report.js?v=3" ></script>-->
+    <script>
+        $(document).ready(function () {
+
+            $('#from').datepicker({
+                dateFormat: "yy-mm-dd"
+            });
+            $('#to').datepicker({
+                dateFormat: "yy-mm-dd"
+            });
+            $("#form").submit(function(e){
+			    e.preventDefault();
+                window.location = "/download_report/"+$("#name").val()+"/"+$("#from").val()+"/"+$("#to").val();
+            });
+        });
+    </script>
+    <style>
+        .hid{
+            display: none;
+        }
+        button, .pad{
+            margin-top: 3%;
+        }
+        .nn{
+            margin-top: 0;
+        }
+
+    </style>
+    
+</head>
+<body>
+
+{% include "navbar.htm" %}
+
+<div class="pad"></div>
+<form method="GET" id="form"> 
+    <div class="container col-lg-7 col-lg-offset-3">
+        <legend>download custom report</legend>
+
+            <div class="row">   
+                <div class="alert alert-danger col-xs-12 hid" id="err"></div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-sm-6">
+                    <label>Report Name</label>
+                    <select name="name" id="name" class="form-control" required>
+                        <option value="">Select</option>
+                        {%for rep in reports%}
+                            <option>{{rep.name}}</option>
+                        {%endfor%}
+                    </select>
+                </div>
+            </div>
+            
+            <div class="row form-group">
+                <div class="col-sm-3">
+                    <label>from</label>
+                    <input type="text" name="from" class="form-control" id="from" required><br>
+                </div>
+                <div class="col-sm-3">
+                    <label>to</label>
+                    <input type="text" name="to" class="form-control" id="to" required><br>
+                </div>
+            </div>
+
+        <div class="row">
+            <button type="submit" class="btn btn-primary col-xs-offset-3 col-xs-6" id="submit" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Please wait...">Submit</button><br>
+        </div>
+        <div></div>
+    
+    </div>
+</form>
+
+</body>
+</html>

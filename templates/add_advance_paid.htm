@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css" rel="Stylesheet"></link>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
+    <script src="//code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="/static/add_advance_paid.js?v=4" ></script>
+    <style>
+        .hid{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+{% include "navbar.htm" %}
+
+<form method="GET" id="form">
+    <div class="container col-sm-8 col-sm-offset-2 col-lg-5 col-lg-offset-4">
+        <legend>Add advance form</legend>
+
+            <div class="row">   
+                <div class="alert alert-danger col-xs-12 hid" id="err"></div>
+            </div>
+            
+            <div class="row form-group">
+                <div class="col-sm-3 col-lg-4">
+                    <label>Date</label>
+                    <input type="date" name="date" class="form-control" id="date" required><br>
+                </div>
+                <div class="col-sm-3 col-lg-4 col-sm-offset-6 col-lg-offset-4">
+                    <label>Type</label>
+                    <select name="type" id="type" class="form-control">
+                        <option value="1">Paid</option>
+                        <option value="0">Recieved</option>
+                    </select>
+                </div>
+            </div>
+
+            
+            <div class="row form-group">
+                <div class="col-sm-6">
+                    <label>Vendor Name</label>
+                    <input type="text" name="vendor_name" id="vendor_name" class="form-control" required><br>
+                </div>
+            
+                
+                <div class="col-sm-6">
+                    <label>Vendor's ID</label>
+                    <input type="text" name="vendor_id" id="vendor_id" class="form-control disabled" required disabled><br>
+                </div>
+
+            </div>
+        
+            
+            <div class="row form-group">
+                <div class="col-sm-6">
+                    <label>Amount</label>
+                    <input type="number" step="0.01" name="amount" id="amount" class="form-control calc" required><br>
+                </div>
+            
+                <div class="col-sm-6">
+                    <label>Tax %</label>
+                    <input type="number" step="0.01" name="tax_rate" id="tax_rate" class="form-control calc" required><br>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-sm-6">
+                    <label>Type of supply</label>
+                    <select name="type_of_supply" id="type_of_supply" class="form-control">
+                        <option value="1">Inter</option>
+                        <option value="0">Intra</option>
+                    </select>
+                </div>
+                <div class="col-sm-6">
+                    <label>tax</label>
+                    <input type="number" step="0.01" name="tax" id="tax" class="form-control" required><br>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-xs-6">
+                    <label>Item name</label>
+                    <input type="text" name="" id="item_name" class="form-control" required><br>
+                </div>
+                <div class="row">
+                    <button type="button" class="btn btn-primary col-xs-offset-1 col-xs-10" id="add_item">Add Item</button><br>
+                </div>
+            </div>
+
+            <div class="row table table-reposnsive">
+                <table id="item_list" class="col-sm-12">
+                    <tr class="row"> <th class="col-xs-2">Item Name</th> <th class="col-xs-2">Item code</th><th class="col-xs-2">HSN</th><th  class="col-xs-4">Item Description</th><th  class="col-xs-2">Tax</th></tr>
+                        
+                </table>
+            </div>
+
+            
+        <div class="row">
+            <button type="submit" class="btn btn-primary col-xs-offset-3 col-xs-6" id="submit" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Please wait...">Submit</button><br>
+        </div>
+        <div></div>
+    
+    </div>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Debit Note/Credit Note</title>
+</head>
+<body>
+<div style="position:absolute;">
+	<div style="float:left; width:100%" id="div1">
+		<table width=100% id="table1" border="1">
+			<tr>
+				<td width="20%">{{img}}</td>
+				<th width="80%">Debit Note/Credit Note</th>
+			</tr>
+		</table>
+		<table width=100% id="table2" border="1">
+			<tr><td align="center">{{name_of_comp}}</td></tr>
+			<tr><td align="center">{{cin}}</td></tr>
+			<tr><td align="center">{{address1}}</td></tr>
+			<tr><td align="center">GSTIN Number:{{gstn}}</td></tr>
+			<tr><td align="left">State:{{state1}}</td></tr>
+			<tr><td align="left">Debit Note/Credit Note Number:{{inv_num}}</td></tr>
+			<tr>
+			<td align="left">Debit Note/Credit Note Date: {{invoice_dt}}</td>
+			</tr>
+			<tr><td align="center">Details of Receiver (Billed to)</td></tr>
+			<tr><td align="left">Name:{{name}}</td></tr>
+			<tr><td align="left">Address:{{addr1}}</td></tr>	
+		</table>
+		<table width=100% id="table2" border="1">
+			<tr>
+				<td align="left" width="70%">State:{{state2}}</td>
+				<td align="left" width="30%">State Code:{{state_code}}</td>
+			</tr>
+			<tr><td width="70%">GSTIN Number: {{gstin_num}}</td>
+				<td width="30%"></td>	
+				</tr>
+		</table>
+		
+	</div>
+	<div style="float:left; width:40%" id="div2">
+					<table width="100%" border="1">
+						<tr>
+							<th width="10%">S.no</th>
+							<th width="45%">Original Invoice Number</th>
+							<th width="45%">Original Invoice date</th>
+						</tr><!--Add new rows dynamically here-->
+						<!--<tr>
+							<td width="10%">S.no</td>
+							<td width="45%">Original Invoice Number</td>
+							<td width="45%">Original Invoice date</td>
+						</tr>
+						<tr>
+							<td width="10%">S.no</td>
+							<td width="45%">Original Invoice Number</td>
+							<td width="45%">Original Invoice date</td>
+						</tr>
+						<tr>
+							<td width="10%">S.no</td>
+							<td width="45%">Original Invoice Number</td>
+							<td width="45%">Original Invoice date</td>
+						</tr>
+						<tr>
+							<td width="10%">S.no</td>
+							<td width="45%">Original Invoice Number</td>
+							<td width="45%">Original Invoice date</td>
+						</tr>
+						<tr>
+							<td width="10%">S.no</td>
+							<td width="45%">Original Invoice Number</td>
+							<td width="45%">Original Invoice date</td>
+						</tr>
+						<tr>
+							<td width="10%">S.no</td>
+							<td width="45%">Original Invoice Number</td>
+							<td width="45%">Original Invoice date</td>
+						</tr>-->
+						
+						<tr><td></td>
+							<td align="center">Total</td>
+							<td></td>
+						</tr>
+						<tr><td></td>
+							<td align="center">Total Invoice value</td>
+							<td>(In Figure)</td>
+						</tr>
+						<tr><td></td>
+							<td align="center">Total Invoice Value</td>
+							<td>(In Words)</td>
+						</tr>
+					</table>
+						
+					<table width="100%" border="1">
+						<tr>
+						<th>Bank Details</th>
+						<td>Bank Account Number:</td>
+						<td>{{bank_det}}</td>
+						<td>IFSC Code:</td>
+						<td>{{ifsc_cd}}</td>
+						
+						</tr>
+					</table>
+				</div>
+	<div style="float:left; width:60%" id="div3">
+					<table width="100%" border="1">
+						<tr>
+							<th>Taxable Value</th>
+							<th>CGST</th>
+							<th>CGST</th>
+							<th>SGST</th>
+							<th>SGST</th>
+							<th>IGST</th>
+							<th>IGST</th>
+							<th>Total</th>
+						</tr>
+						<tr>
+							<th></th>
+							<th>Rate</th>
+							<th>Amount</th>
+							<th>Rate</th>
+							<th>Amount</th>
+							<th>Rate</th>
+							<th>Amount</th>
+							<th>Amount</th>
+						</tr>	<!--Add new rows dynamically here-->
+						{%for key, value in tax_form.iteritems()%}
+						<tr>
+							<td></td>
+							{%for key, value in items.iteritems()%}
+							<td>{{value}}</td>
+							{%endfor%}
+						</tr>
+						{%endfor%}
+						<!--<tr>
+							<td></td>
+							<td>Rate</td>
+							<td>Amount</td>
+							<td>Rate</td>
+							<td>Amount</td>
+							<td>Rate</td>
+							<td>Amount</td>
+							<td>Amount</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td>Rate</td>
+							<td>Amount</td>
+							<td>Rate</td>
+							<td>Amount</td>
+							<td>Rate</td>
+							<td>Amount</td>
+							<td>Amount</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td>Rate</td>
+							<td>Amount</td>
+							<td>Rate</td>
+							<td>Amount</td>
+							<td>Rate</td>
+							<td>Amount</td>
+							<td>Amount</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td>Rate</td>
+							<td>Amount</td>
+							<td>Rate</td>
+							<td>Amount</td>
+							<td>Rate</td>
+							<td>Amount</td>
+							<td>Amount</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td>Rate</td>
+							<td>Amount</td>
+							<td>Rate</td>
+							<td>Amount</td>
+							<td>Rate</td>
+							<td>Amount</td>
+							<td>Amount</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td>Rate</td>
+							<td>Amount</td>
+							<td>Rate</td>
+							<td>Amount</td>
+							<td>Rate</td>
+							<td>Amount</td>
+							<td>Amount</td>
+						</tr>
+						
+						-->
+					</table>
+					<!--<table width="100%" border=1">
+						<tr><td></td></tr>
+					</table>-->
+				</div>
+
+	<div>
+		<table width="100%" border="1">
+			<tr>
+				<td>YOUR TERM AND CONDITIONS OF SALE</td>
+				<td>{{company_name}}</td>
+			</tr>
+			<tr>
+				<td>{{term_cnd1}}</td>
+				<td>Signature:{{sign}}</td>
+			</tr>
+			<tr>
+				<td>{{term_cnd2}}</td>
+				<td><strong>Authorised Signatory {{a_sign}}</strong></td>
+			</tr>
+		</table>
+	</div>
+</div>
+	</body>
+</html>

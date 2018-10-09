@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css" rel="Stylesheet"></link>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
+    <script src="//code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="/static/purchase.js?v=0.43" ></script>
+    <style>
+        .hid{
+            display: none;
+        }
+        button, .pad{
+            margin-top: 7%;
+        }
+        .nn{
+            margin-top: 0;
+        }
+
+    </style>
+</head>
+<body>
+
+{% include "navbar.htm" %}
+<form method="GET" id="form">
+    <div class="container col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3">
+        <div class="row">
+            <a href="/add_item"><button type="button" class="btn btn-primary col-sm-offset-3 col-sm-6 col-xs-10 col-xs-offset-1">Add new Item</button></a><br>
+        </div>
+        <div class="row">
+            <a href="/add_vendor"><button type="button" class="btn btn-primary col-sm-offset-3 col-sm-6 col-xs-10 col-xs-offset-1">Add new vendor</button></a><br>
+        </div>
+        <div class="row">
+            <a href="/add_customer"><button type="button" class="btn btn-primary col-sm-offset-3 col-sm-6 col-xs-10 col-xs-offset-1">Add new customer</button></a><br>
+        </div>
+        <div class="row">
+            <a href="/purchase"><button type="button" class="btn btn-primary col-sm-offset-3 col-sm-6 col-xs-10 col-xs-offset-1">Record a Purchase</button></a><br>
+        </div>
+        <div class="row">
+            <a href="/sale"><button type="button" class="btn btn-primary col-sm-offset-3 col-sm-6 col-xs-10 col-xs-offset-1">Record A sale</button></a><br>
+        </div>
+        <div class="row">
+            <a href="/add_advance"><button type="button" class="btn btn-primary col-sm-offset-3 col-sm-6 col-xs-10 col-xs-offset-1">Add an Advance</button></a><br>
+        </div>
+        <div class="row">
+            <a href="/show_sales"><button type="button" class="btn btn-primary col-sm-offset-3 col-sm-6 col-xs-10 col-xs-offset-1">See Sales</button></a><br>
+        </div>
+        <div class="row">
+            <a href="/show_purchases"><button type="button" class="btn btn-primary col-sm-offset-3 col-sm-6 col-xs-10 col-xs-offset-1">See Purchases</button></a><br>
+        </div>
+
+        <div class="pad"></div>
+    
+    </div>
+</form>
+
+</body>
+</html>

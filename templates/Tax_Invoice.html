@@ -1,0 +1,488 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Tax Invoice</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+<style>
+/*.con{
+	width: 560; !important
+}*/
+/*.pad{
+	margin-top: 10px;
+}*/
+
+body {
+        width: 1300px;
+        font-size: 11px;
+    }
+ @media print{
+ 	button{
+ 		display: none;
+ 	}
+ 	body{
+ 		width:auto;
+ 	}
+ 	td{
+ 		height: 12px;
+ 	}
+ }
+.r{
+	display: flex;
+}
+.key{
+	float: left;
+	width: 50%;
+	padding-left: 5px;
+}
+.value{
+	float: right;
+	width: 50%;
+	padding-left: 5px;
+}
+.bordered{
+	border-style: solid;
+}
+.bhead{
+	text-align: center;
+	/*padding: 2px;*/
+}
+.chead{
+	float: center;
+	width: 50%;
+	margin-left: 25%;
+}
+.dhead{
+	float: right;
+	width: 25%;
+}
+
+</style>
+
+</head>
+<body onload="">
+<div class="r">
+	<div class="chead">
+		<div style=" text-align:center"><h2>Tax Invoice</h2></div>
+		<div class="bhead"><h4>{{name_of_comp}}</h4></div>
+		<div class="bhead">{{cin}}</div>
+		<div class="bhead">{{addr}}</div>
+		<div class="bhead">{% if contact_no != "-" %}Phone: {{contact_no}}{%endif%} Email: {{email}}</div>
+		<div class="bhead">GSTIN:{{gstn}}</div>
+	</div>
+	<div class="dhead">
+		<table class="table-bordered table">
+			<tr><td></td><td>Original for Recepient</td></tr>
+			<tr><td></td><td>Duplicate for Transport</td></tr>
+			<tr><td></td><td>Triplicate for Supplier</td></tr>
+		</table>
+	</div>
+</div>
+		
+
+
+<div class="r">
+<div class="key bordered" style="border-right-style: none; border-bottom-style: none;">
+	<div class="r">
+		<div class="key" >State:</div>
+		<div class="value">{{state}}</div>
+	</div>
+	<div class="r">
+		<div class="key" >Tax Is Payable On Reverse Charge:</div>
+		<div class="value"> No</div>
+	</div>
+	<div class="r">
+		<div class="key" >Invoice Serial Number:</div>
+		<div class="value">{{Sno}}</div>
+	</div>
+	<div class="r">
+		<div class="key" >Invoice Date:</div>
+		<div class="value">{{DT}}</div>
+	</div>
+</div>
+
+<div class="value bordered" style="border-bottom-style: none;" >
+	<div class="r">
+		<div class="key" >Transportation Mode:</div>
+		<div class="value">{{TsptMd}}</div>
+	</div>
+	<div class="r">
+		<div class="key" >Vehicle No:</div>
+		<div class="value">{{Vikno}}</div>
+	</div>
+	<div class="r">
+		<div class="key" >Date & Time of Supply:</div>
+		<div class="value">{{DTM}}</div>
+	</div>
+	<div class="r">
+		<div class="key" >Place of Supply:</div>
+		<div class="value">{{FSup}}</div>
+	</div>
+</div>
+
+</div>
+<div class="r">
+<div class="key bordered" style="border-right-style: none;">
+	<div><b>Details of Receiver (Billed to)</b></div>
+	<div class="r">
+		<div class="key" >Name:</div>
+		<div class="value">{{nmB}}</div>
+	</div>
+	<div class="r">
+		<div class="key" >Address:</div>
+		<div class="value">{{addrB}}</div>
+	</div>
+	<div class="r">
+		<div class="key" >State:</div>
+		<div class="value">{{StB}}</div>
+	</div>
+	<div class="r">
+		<div class="key" >State Code:</div>
+		<div class="value">{{StCdB}}</div>
+	</div>
+	<div class="r">
+		<div class="key" >GSTIN Number(if registered):</div>
+		<div class="value">{{var01}}</div>
+	</div>
+</div>
+<div class="value bordered">
+	<div><b>Details of Consignee (Shipped to)</b></div>
+	<div class="r">
+		<div class="key" >Name:</div>
+		<div class="value">{{nmS}}</div>
+	</div>
+	<div class="r">
+		<div class="key" >Address:</div>
+		<div class="value">{{addrS}}</div>
+	</div>
+	<div class="r">
+		<div class="key" >State:</div>
+		<div class="value">{{StS}}</div>
+	</div>
+	<div class="r">
+		<div class="key" >State Code:</div>
+		<div class="value">{{StCdS}}</div>
+	</div>
+	<div class="r">
+		<div class="key" >GSTIN Number(if registered):</div>
+		<div class="value">{{var02}}</div>
+	</div>
+</div>
+</div>
+<div style="float:left; width:100%">
+<!--<div style="float:left; width:50%" >-->
+					<table class="table table-bordered table-condensed" width="100%" border="1" style="font-size:12">
+						<tr>
+							<th>S.no</th>
+							{%if matc == 1%}
+						<th >Material Code</th>
+						{%endif%}
+						<th >Description of Goods</th>
+						<th id="row1">HSN Code(GST)</th>
+						<th >Qty</th>
+						<th>Unit</th>
+						<th >Rate</th>
+						<th >Total</th>
+						<th >Discount</th>
+						<th >Taxable Value</th>
+						{% if state == FSup %}
+							<th >CGST Rate</th>
+							<th >CGST Amount</th>
+							<th >{{stut}} Rate</th>
+							<th >{{stut}} Amount</th>
+						{%endif%}
+						{%if state != FSup %}
+							<th >IGST Rate</th>
+							<th >IGST Amount</th>
+						{% endif %}
+						<th>Total Amount</th>
+						</tr>
+						<!--Add new rows dynamically here-->
+						{%for item in items%}
+							
+							<tr>
+<td>{{loop.index}}</td>
+{%if matc == 1%} 
+<td>{{item["id"]}}</td>
+{%endif%} 
+<td>{{item["description"]}}</td>
+ <td>{{item["HSN"]}}</td>
+  <td>{{item["quantity"]}}</td>
+  <td>{{item.unit}}</td>
+   <td>{{'%0.2f' % (item["rate"])}}</td>
+    <td>{% set qty = item["quantity"]|float%}{%set rt = item["rate"]|float %}{{'%0.2f' % ((qty*rt)|round(2))}}</td> 
+    <td>{{item["discount"]}}</td> 
+    <td>{{'%0.2f' % (item["amount"]|round(2))}}</td> 
+{% if state == FSup %}
+	<td>{% if state == FSup %}{{'%0.2f' % ((item["tax"]|float)/2.0)}}{%endif%}</td><td>{{'%0.2f' % (item["CGST"]|round(2))}}</td> 
+	<td>{% if state == FSup %}{{'%0.2f' % ((item["tax"]|float)/2.0)}}{%endif%}</td><td>{{'%0.2f' % ((item["SGST"]|float)|round(2))}}</td>
+{%endif%}
+
+{%if state != FSup %}
+	<td>{% if state != FSup %}{{'%0.2f' % ((item["tax"]|float)|round(2))}}{%endif%}</td><td>{{'%0.2f' % ((item["IGST"]|float)|round(2))}}</td>
+{%endif%}
+
+<td>{% set y = ((item["amount"]|float) + (item["CGST"]|float) + (item["SGST"]|float) + (item["IGST"]|float))|round(2)%}{{'%0.2f' % y}}</td>
+							</tr>
+						{%endfor%}
+
+						<tr style="background-color: #dddddd">
+							<td></td>
+							{%if matc == 1%}
+							<td></td>
+							{%endif%}
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							{% if state == FSup %}
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							{%endif%}
+							{% if state != FSup %}
+							<td></td>
+							<td></td>
+							{%endif%}
+							<td></td>
+							
+						</tr>
+{%if (tot_frit_chrg|float)|round(2) > 0 %}
+						<tr>
+							
+							<th colspan="3">Freight Charges</th>
+							<td></td>
+							{%if matc == 1%}
+							<td></td>
+							{%endif%}
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>{{'%0.2f' % ((tot_frit_chrg|float)|round(2))}}</td>
+							{% if state == FSup %}
+							<td></td>
+							<td>{{'%0.2f' % ((tot_frit_chrg|float)|round(2)*taxm/200.0)}}</td>
+							<td></td>
+							<td>{{'%0.2f' % ((tot_frit_chrg|float)|round(2)*taxm/200.0)}}</td>
+							{%endif%}
+							{% if state != FSup %}
+							<td></td>
+							<td>{{'%0.2f' % ((tot_frit_chrg|float)|round(2)*taxm/100.0)}}</td>
+							{%endif%}
+							<td></td>
+							
+						</tr>
+						{%endif%}
+						{%if (loading_chrg|float)|round(2)>0 %}
+						<tr>
+
+							<th colspan="3">Loading Charges</th>
+							{%if matc == 1%}
+							<td></td>
+							{%endif%}
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>{{'%0.2f' % ((loading_chrg|float)|round(2))}}</td>
+							{% if state == FSup %}
+							<td></td>
+							<td>{{'%0.2f' % ((loading_chrg|float)|round(2)*taxm/200.0)}}</td>
+							<td></td>
+							<td>{{'%0.2f' % ((loading_chrg|float)|round(2)*taxm/200.0)}}</td>
+							{%endif%}
+							{% if state != FSup %}
+							<td></td>
+							<td>{{'%0.2f' % ((loading_chrg|float)|round(2)*taxm/100.0)}}</td>
+							{%endif%}
+							<td></td>
+							
+						</tr>
+						{%endif%}
+						{%if (insurance_chrg|float)|round(2) > 0 %}
+						<tr>
+							
+							<th colspan="3">Insurance Charges</th>
+							{%if matc == 1%}<td></td>{%endif%}
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>{{'%0.2f' % ((insurance_chrg|float)|round(2))}}</td>
+							{% if state == FSup %}
+							<td></td>
+							<td>{{'%0.2f' % ((insurance_chrg|float)|round(2)*taxm/200.0)}}</td>
+							<td></td>
+							<td>{{'%0.2f' % ((insurance_chrg|float)|round(2)*taxm/200.0)}}</td>
+							{%endif%}
+							{% if state != FSup %}
+							<td></td>
+							<td>{{'%0.2f' % ((insurance_chrg|float)|round(2)*taxm/100.0)}}</td>
+							{%endif%}
+							<td></td>
+							
+						</tr>
+						{%endif%}
+						{%if (other_chrg|float)|round(2) > 0 %}
+						<tr>
+							
+							<th colspan="3">Other Charges</th>
+							{%if matc == 1%}<td></td>{%endif%}
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>{{'%0.2f' % ((other_chrg|float)|round(2))}}</td>
+							{% if state == FSup %}
+							<td></td>
+							<td>{{'%0.2f' % ((other_chrg|float)|round(2)*taxm/200.0)}}</td>
+							<td></td>
+							<td>{{'%0.2f' % ((other_chrg|float)|round(2)*taxm/200.0)}}</td>
+							{%endif%}
+							{% if state != FSup %}
+							<td></td>
+							<td>{{'%0.2f' % ((other_chrg|float)|round(2)*taxm/100.0)}}</td>
+							{%endif%}
+							<td></td>
+							
+						</tr>
+						{%endif%}
+						<tr style="background-color: #dddddd">
+							<td></td>
+							{%if matc == 1%}<td></td>{%endif%}
+							<!-- <td>Total</td> -->
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							{% if state == FSup %}
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							{%endif%}
+							{% if state != FSup %}
+							<td></td>
+							<td></td>
+							{%endif%}
+							<td></td>
+							
+						</tr>
+							<tr>
+							
+							<td colspan="4"><b>Total Invoice Value(in figures)</b></td>
+							{%if matc == 1%}
+							<td></td>
+							{%endif%}
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							{% if state == FSup %}
+							<td></td>
+							<td><b>{{'%0.2f' % (((tot_cgst|float)+oth_tax/2)|round(2))}}</b></td>
+							<td></td>
+							<td><b>{{'%0.2f' % (((tot_sgst|float)+oth_tax/2)|round(2))}}</b></td>
+							{%endif%}
+							{% if state != FSup %}
+							<td></td>
+							<td><b>{{'%0.2f' % (((tot_igst|float)+oth_tax)|round(2))}}</b></td>
+							{%endif%}
+							<td><b>{{(total)}}</b></td>
+							
+						</tr>
+						<tr>
+						
+							<td colspan="4"><b>Total Invoice Value(in words)</b></td>
+							{%if matc == 1%}
+
+							{% if state == FSup %}
+							<td colspan="11" style="text-align: center;"><b>{{total_word}}</b></td>
+							{% else %}
+							<td colspan="9" style="text-align: center;"><b>{{total_word}}</b></td>
+							{% endif %}
+
+							
+							{%else%}
+							{% if state == FSup %}
+							<td colspan="10" style="text-align: center;"><b>{{total_word}}</b></td>
+							{% else %}
+							<td colspan="8" style="text-align: center;"><b>{{total_word}}</b></td>
+							{% endif %}
+							{%endif%}
+						</tr>
+						
+						</table>
+
+<div>
+
+					{%if ((bankac!="-" or ifsc!="-") or (bankname!="-" or bank_addr!="-")) or (swift!="-" or bank_contact!="-") %}
+					
+					<caption style=""><b style="color: black; padding: 7px;">Bank Details</b></caption>
+					{%endif%}
+					<table class="table " style="" >
+					{% if bankac!="-" or ifsc!="-" %}
+						<tr>
+							<td style="width: 20%">Bank Account Number:</td>
+							<td>{{bankac}}</td>
+							<td style="width: 20%">IFSC Code:</td>
+							<td>{{ifsc}}</td>
+						</tr>
+					{%endif%}
+
+					{% if bankname!="-" or bank_addr!="-" %}
+						<tr>
+							<td style="width: 20%">Bank name:</td>
+							<td>{{bankname}}</td>
+							<td style="width: 20%">Bank address:</td>
+							<td>{{bank_addr}}</td>
+						</tr>
+						{%endif%}
+					{% if swift!="-" or bank_contact!="-" %}
+						<tr>
+							<td style="width: 20%">Bank swift code:</td>
+							<td>{{swift}}</td>
+							<td style="width: 20%">Bank contact:</td>
+							<td>{{bank_contact}}</td>
+						</tr>
+						{%endif%}
+						{%if pan != "-"%}
+						<tr>
+							<td style="width: 20%">Pan:</td>
+							<td colspan="3">{{pan}}</td>
+						</tr>
+						{%endif%}
+					</table>
+		<table class="table table-bordered" width="100%" border="1">
+			<tr>
+				<td><b>TERM AND CONDITIONS OF SALE</b></td>
+				<td><b>{{name_of_comp}}</b></td>
+			</tr>
+			
+			<tr>
+				<td>{{tnc|safe}}</td>
+				<td rowspan="2">Signature:{{sign}}<br><br>Authorised Signatory: {{a_sign}}</td>
+			</tr>
+
+			<tr>
+				<td><b>Other Details:</b>{{oth_details}}</td>
+			</tr>
+		</table>
+	</div>						
+</div>
+<button type="button" onclick="window.print();return false;" style="margin-left: 50%">print</button>
+</body>
+</html>

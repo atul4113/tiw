@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css" rel="Stylesheet"></link>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
+    <script src="//code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="/static/purchase.js?v=0.43" ></script>
+    <script src="/static/jquery.table2excel.js"></script>
+    <style>
+        .hid{
+            display: none;
+        }
+        button, .pad{
+            margin-top: 3%;
+        }
+        .nn{
+            margin-top: 0;
+        }
+        .di .ui-dialog-titlebar{
+            display: none;
+        }
+        .di .ui-dialog-content{
+            text-align: center;
+        }
+
+    </style>
+    <script type="text/javascript">
+        function delete_purchase(inno) {
+            sure = confirm("Are you sure you want to delete invoice no."+ inno);
+            if (sure) {
+                $.get("/del_purchase/"+inno,function(){
+                    location.reload();
+                });
+            }
+        }
+
+        function toggle_paid(id, curr) {
+            if (curr == 1) {
+                window.location = "/toggle_paid/"+id+"/-1";
+            } else{
+            $('#dialog').dialog({
+                 modal: true,
+                 title: "Change payment status",
+                 dialogClass: "di",
+                 buttons: {
+                     'Bank' : function () {
+                          window.location = "/toggle_paid/"+id+"/1";  
+                     },
+                     'Cash' : function () {
+                         window.location = "/toggle_paid/"+id+"/0";
+                     }
+                 }
+             });}
+        }
+
+        $(document).ready(function(){
+            $("#can").click(function(){
+                $(".canceled").removeClass("hid");
+                $(".active2").addClass("hid");
+            });
+       
+            $("#act").click(function(){
+                $(".canceled").addClass("hid");
+                $(".active2").removeClass("hid");
+            });
+            $("#export").click(function(){
+                $("#toexp").table2excel({
+                    exclude:".noxl",
+                    name:"purchase",
+                    filename:"purchase"
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+
+{% include "navbar.htm" %}
+{%set pur_typr = ["","Stock","Fixed Asset","Others"] %}
+{%set bool = ["No","Yes"]%}
+{%set bank = ["Cash","Bank"]%}
+<div class="pad"></div>
+    <button id="can">Show Deleted</button>
+    <button id="act">Show active</button>
+    <button id="export">Export</button>
+ <div id="dialog" class="hid">Select payment method</div>
+<table  id="toexp" class="table table-striped table-bordered">
+
+   
+
+    <thead><tr>
+        <th><b>S.No.</b></th> <th class="noxl">Print invoice</b></th> <th class="noxl" class="active2">Delete purchase</b></th> <th><b>Invoice No.</b></th> <th><b>purchase type</b></th> <th><b>Vendor name</b></th> <th><b>Vendor's ID</b></th> <th><b>Vendor's address</b></th> <th><b>Vendor's state</b></th>
+        <th><b>Vendor's status</b></th> <th><b>Vendor's GSTN</b></th>
+        <th><b>Item name</b></th> <th><b>Item code</b></th> <th><b>HSN</b></th> <th><b>Quantity</b></th> <th><b>Rate</b></th> <th><b>Tax rate</b></th> <th><b>Discount</b></th> <th><b>Amount</b></th>
+        <th><b>Reverse Charge</b></th>
+        <th><b>CGST</b></th> <th><b>{{stut}}</b></th> <th><b>IGST</b></th> <th><b>Place of supply</b></th> <th><b>EBN</b></th> <th><b>Transportation Mode</b></th> <th><b>Vehicle No.</b></th>
+        <th><b>Frieght Charges</b></th>
+        <th><b>Loading charges</b></th> <th><b>Insurance Charges</b></th> <th><b>Other charges</b></th> <th><b>TDS(GST)</b></th> <th><b>TDS(Income tax)</b></th> <th><b>Other Details</b></th> <th><b>Amount Payable</b></th> <th><b>Advances linked</b></th> <th><b>paid</b></th> <th><b>Payment Method</b></th> <th><b>Mismatch</b></th><th><b>Blocked Credit</b></th>
+    </tr></thead>
+
+    <tbody>
+    {%set toop = {"index":1}%}
+        {%for pur in purchases%}
+
+            {%for item in pur["items"]%}
+                {% if pur.canceled %}
+                <tr class="canceled hid noxl">
+                {% else %}
+                <tr class="active2">
+                {% endif %}
+                    <td>{{toop.index}}</td> <td  class="noxl"><a href="/print/purchase/{{pur.id}}"><button class="btn btn-primary" style=" padding-top:0; padding-bottom: 0;">print</button></a></td>
+                    {% if not pur.canceled %}
+                    <td class="noxl"><button class="btn btn-danger" onclick="delete_purchase(this.value)" value="{{pur.id}}" style=" padding-top:0; padding-bottom: 0;">Delete</button></td>
+                    {% endif %}
+                    <td>{{pur.id}}</td>
+                    <td>{{pur_typr[pur.purchase_type|int]}}</td><td>{{pur.vendor_name}}</td><td>{{pur.vendor_id}}</td><td>{{pur.vendor_address}}</td><td>{{pur.state_name}}</td> 
+                    <td>{{pur.reg}}</td> <td>{{pur.GSTN}}</td> <td>{{item.name}}</td> <td>{{item.id}}</td> <td>{{item.HSN}}</td> <td>{{item.quantity}}</td>
+                    <td>{{item.rate}}</td> <td>{{item.tax}}</td> <td>{{item.discount}}</td> <td>{{item.amount}}</td>
+                    <td>{{bool[pur.reverse_charge|int]}}</td>
+                    <td>{{item.CGST}}</td><td>{{item.SGST}}</td><td>{{item.IGST}}</td><td>{{pur.place_of_supply}}</td><td>{{pur.ebn}}</td> <td>{{pur.transportation_mode}}</td><td>{{pur.vehicle_no}}</td><td>{{pur.frieght}}</td><td>{{pur.loading}}</td><td>{{pur.insurance}}</td><td>{{pur.other_charges}}</td>
+                    <td>{{pur.tds1}}</td><td>{{pur.tds2}}</td><td>{{pur.tds2_text}}</td><td>{{pur.amount_payable}}</td><td>{{pur.advance}}</td>
+                    
+                    <td class="noxl"><button class="btn btn-warning" onclick="toggle_paid(this.value, this.id)" id="{{pur.paid}}" value="{{pur.id}}" style=" padding-top:0; padding-bottom: 0;">{{bool[pur.paid|int]}}</button></td>
+                    <td class="hid">{{bool[pur.paid|int]}}</td>
+                    <td>{% if pur.payment_method is defined%}{{bank[pur.payment_method|int]}}{%endif%}</td>
+                    <td class="noxl">
+
+                    <a href="/toggle_mismatch/{{pur.id}}"><button class="btn btn-warning" style=" padding-top:0; padding-bottom: 0;">{{bool[pur.mismatch|int]}}</button></a>
+                    </td>
+                    <td class="hid">{{bool[pur.mismatch|int]}}</td>
+                    <td class="noxl">
+
+                    <a href="/toggle_blocked_credit/{{pur.id}}"><button class="btn btn-warning" style=" padding-top:0; padding-bottom: 0;">{{bool[pur.blocked_credit|int]}}</button></a>
+                    </td>
+                    <td class="hid">{{bool[pur.blocked_credit|int]}}</td>
+                    
+                </tr>
+                {%if toop.update({"index":toop.index +1})%}{%endif%}
+
+            {%endfor%}
+        {%endfor%}
+    </tbody>
+    
+</table>
+
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css" rel="Stylesheet"></link>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
+    <script src="//code.jquery.com/ui/1.12.0/jquery-ui.js" ></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="/static/custom.js?v3" ></script>
+    <style>
+        .hid{
+            display: none;
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#diff_series").val({{session.diff_series}});
+        });
+    </script>
+</head>
+<body>
+
+{% include "navbar.htm" %}
+
+<form method="GET" id="form">
+    <div class="container col-sm-8 col-sm-offset-2 col-lg-5 col-lg-offset-4">
+        <legend>Customization form</legend>
+            <div class="row">   
+                <div class="alert alert-danger col-xs-12 hid" id="err"></div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-sm-6">
+                    <label>Bank A/c</label>
+                    <input type="text" name="bankac" class="form-control" id="bankac" value="{{session.bankac}}"><br>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-sm-6">
+                    <label>IFSC</label>
+                    <input type="text" name="ifsc" class="form-control" id="ifsc" value="{{session.ifsc}}"><br>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-sm-6">
+                    <label>Bank name</label>
+                    <input type="text" name="bankname" class="form-control" id="bankname" value="{{session.bankname}}"><br>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-sm-6">
+                    <label>Bank swift code</label>
+                    <input type="text" name="swift" class="form-control" id="swift" value="{{session.swift}}"><br>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-sm-6">
+                    <label>Bank bank contact</label>
+                    <input type="text" name="bank_contact" class="form-control" id="bank_contact" value="{{session.bank_contact}}"><br>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-sm-12">
+                    <label>Bank Address</label>
+                    <input type="textarea" name="bank_addr" class="form-control" id="bank_addr" value="{{session.bank_addr}}"><br>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-sm-6">
+                    <label>Contact No(s)</label>
+                    <input type="textarea" name="contact_no" class="form-control" id="contact_no" value="{{session.contact_no}}"><br>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-sm-12">
+                    <label>Terms and condition</label>
+                    <input type="textarea" name="tnc" class="form-control" id="tnc" value="{{session.tnc}}"><br>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-sm-12">
+                    <label>Address</label>
+                    <input type="textarea" name="address" id="address" class="form-control" value = "{{session.address}}" required><br>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <label class="col-sm-10"> Do you want material code on your invoices?</label>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <select name="matc" id="matc" class="form-control" required>
+                        {%if session.matc == 1%}
+                            <option selected value="1">Yes</option>
+                            <option value="0">No</option>
+                        {%else%}
+                            <option value="1">Yes</option>
+                            <option selected value="0">No</option>
+                        {%endif%}
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+
+
+        <div class="row">
+            <button type="submit" class="btn btn-primary col-xs-offset-3 col-xs-6" id="submit" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Please wait...">Submit</button><br>
+        </div>
+        <div></div>
+    
+    </div>
+</form>
+
+</body>
+</html>

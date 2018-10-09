@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css" rel="Stylesheet"></link>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
+    <script src="//code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="/static/add_customer.js?q=22" ></script>
+    <style>
+        .hid{
+            display: none;
+        }
+        .pad{
+            margin-top: 10%;
+        }
+    </style>
+</head>
+<body>
+
+{% include "navbar.htm" %}
+
+<form method="GET" id="form">
+    <div class="container col-sm-8 col-sm-offset-2 col-lg-5 col-lg-offset-4">
+        <legend>Add Customer form</legend>
+
+            <div class="row">   
+                <div class="alert alert-danger col-xs-12 hid" id="err"></div>
+            </div>
+            
+            <div class="row form-group">
+                <div class="col-sm-12">
+                    <label>Customer Name</label>
+                    <input type="text" name="name" id="name" class="form-control" required><br>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-sm-12">
+                    <label>Customer email</label>
+                    <input type="email" name="email" id="email" class="form-control"><br>
+                </div>
+            </div>
+        
+            <div class="row form-group">
+                <div class="col-sm-12">
+                    <label>Customer's Address</label>
+                    <input type="textarea" name="address" id="address" class="form-control" required><br>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-sm-3 col-lg-4">
+                    <label>Type of entity</label>
+                    <select name="type_of_entity" id="type_of_entity" class="form-control" required>
+                        <option>Individual</option>
+                        <option>Sole Proprietor</option>
+                        <option>Partnership</option>
+                        <option>HUF</option>
+                        <option>Company</option>
+                        <option>AOP</option>
+                        <option>BOI</option>
+                        <option>Society</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+           
+                <div class="col-sm-3 col-lg-4">
+                    <label>State</label>
+                    <select name="state" id="state" class="form-control" required>
+                        <option value="">Select</option>
+                        <option value="1">Jammu and Kashmir</option>
+                        <option value="2">Himachal Pradesh</option>
+                        <option value="3">Punjab</option>
+                        <option value="4">Chandigarh</option>
+                        <option value="5">Uttarakhand</option>
+                        <option value="6">Haryana</option>
+                        <option value="7">Delhi</option>
+                        <option value="8">Rajasthan</option>
+                        <option value="9">Uttar Pradesh</option>
+                        <option value="10">Bihar</option>
+                        <option value="11">Sikkim</option>
+                        <option value="12">Arunachal Pradesh</option>
+                        <option value="13">Nagaland</option>
+                        <option value="14">Manipur</option>
+                        <option value="15">Mizoram</option>
+                        <option value="16">Tripura</option>
+                        <option value="17">Meghalaya</option>
+                        <option value="18">Assam</option>
+                        <option value="19">West Bengal</option>
+                        <option value="20">Jharkhand</option>
+                        <option value="21">Odisha(Orissa)</option>
+                        <option value="22">Chhattisgarh</option>
+                        <option value="23">Madhya Pradesh</option>
+                        <option value="24">Gujarat</option>
+                        <option value="25">Daman and Diu</option>
+                        <option value="26">Dardra and Nagara haveli</option>
+                        <option value="27">Maharashtra</option>
+                        <option value="28">Andhra Pradesh</option>
+                        <option value="29">Karnataka</option>
+                        <option value="30">Goa</option>
+                        <option value="31">Lakshadweep</option>
+                        <option value="32">Kerala</option>
+                        <option value="33">Tamil Nadu</option>
+                        <option value="34">Puducherry</option>
+                        <option value="35">Andaman and Nicobar island</option>
+                        <option value="36">Telangana</option>
+                        
+
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="row form-group">
+                <div class="col-sm-3 col-lg-4">
+                    <label>Customer's Status</label>
+                    <select name="reg" id="reg" class="form-control" required>
+                        <option value="">Select</option>
+                        <option value="1">Registered</option>
+                        <option value="0">Unregistered</option>
+                    </select>
+                </div>
+            
+                <div class="col-lg-8 col-sm-9">
+                    <label>Customer's GSTN<br></label>
+                    <input type="text" name="GSTN" id="GSTN" class="form-control" required><br>
+                </div>
+            </div>
+
+
+            <div class="pad"></div>
+        <div class="row">
+            <button type="submit" class="btn btn-primary col-xs-offset-3 col-xs-6" id="submit" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Please wait...">Submit</button><br>
+        </div>
+        <div class="pad"></div>
+    
+    </div>
+</form>
+
+</body>
+</html>
